@@ -1,0 +1,34 @@
+.AddedComponent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 55px;
+  border: 1px solid #afacc1;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0 1.2rem;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.AddedComponent .Minus {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  font-weight: 600;
+  background: #fc9d95;
+  border-radius: 100rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.AddedComponent svg {
+  margin-right: 1.2rem;
+}

@@ -1,0 +1,89 @@
+.CvComponent {
+  position: relative;
+  width: 48%;
+  max-height: 80px;
+  padding: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid #afacc1;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  color: #1a1c34;
+}
+
+.Active {
+  min-height: 200px;
+}
+
+.CvComponent:nth-child(9),
+.CvComponent:nth-child(10) {
+  margin-bottom: 0;
+}
+
+.CvComponent .TextContent {
+  margin-left: 1.2rem;
+}
+
+.CvComponent .Plus {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  font-weight: 600;
+  background: #00c45f;
+  border-radius: 100rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.CvComponent .PlusBotton {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 20px;
+  height: 20px;
+  font-weight: 600;
+  background: #00c45f;
+  border-radius: 100rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.CvComponent .TextContent .Title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.CvComponent .TextContent .Description {
+  font-size: 16px;
+}
+
+.OpenedComponent {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.OpenedComponent input {
+  margin-top: 1rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0.4rem;
+}
+
+.OpenedComponent input:last-child {
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,9 @@
+.Tag {
+  padding: 0.5rem;
+  color: #ffffff;
+  margin-right: 1rem;
+}
+
+.Tag:last-child {
+  margin-right: 0;
+}

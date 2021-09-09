@@ -1,0 +1,9 @@
+.ScrollingWindow {
+  width: 30%;
+  max-height: 60vh;
+  border: 1px solid #afacc1;
+  box-sizing: border-box;
+  border-radius: 5px;
+  overflow-y: scroll;
+  padding: 1rem;
+}

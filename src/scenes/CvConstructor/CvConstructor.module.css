@@ -1,0 +1,21 @@
+.CvConstructor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.CvConstructor h3 {
+  width: 100%;
+  font-weight: 500;
+  font-size: 24px;
+  color: #1a1c34;
+  margin-bottom: 25px;
+}
+
+.CvConstructor .ComponentsContainer {
+  width: 67%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}

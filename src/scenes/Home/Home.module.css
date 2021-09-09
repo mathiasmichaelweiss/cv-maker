@@ -1,0 +1,84 @@
+.Home {
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.LeftBlock {
+  width: 40%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.LeftBlock p,
+h1 {
+  margin-bottom: 5rem;
+}
+
+.RightBlock {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url(./img/img-1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: -20rem 0;
+}
+
+.RightBlock .InfoBox {
+  position: absolute;
+  width: 100%;
+  padding: 3rem;
+  right: 50%;
+  bottom: 0;
+  transform: translate(50%);
+  background: #ffffff;
+  box-shadow: -20px 20px 38px rgba(0, 164, 255, 0.1);
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 600;
+  color: #284141;
+}
+
+.RightBlock .InfoBox h3 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #284141;
+  margin-bottom: 1rem;
+}
+
+.RightBlock .InfoBox .Tags {
+  display: flex;
+}
+
+.LeftBlock .TextContent {
+}
+
+.LeftBlock .SubTitle {
+  font-size: 48px;
+  font-weight: 500;
+}
+
+.Home .LeftBlock h1 {
+  font-size: 64px;
+  color: #1a1c34;
+  font-weight: 600;
+}
+
+.Background {
+  position: absolute;
+  background: linear-gradient(180deg, #ceedff 0%, #ffffff 25.52%);
+}
+
