@@ -1,7 +1,16 @@
+@keyframes itemOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .CvComponent {
   position: relative;
-  width: 48%;
-  max-height: 80px;
+  width: 100%;
+  height: 80px;
   padding: 1.2rem;
   display: flex;
   flex-wrap: wrap;
@@ -11,14 +20,25 @@
   border-radius: 5px;
   margin-bottom: 1rem;
   color: #1a1c34;
+  transition: height 1s, background-color 1s;
 }
 
 .Active {
-  min-height: 200px;
+  height: 200px;
+  transition: height 1s;
 }
 
-.CvComponent:nth-child(9),
-.CvComponent:nth-child(10) {
+.Added {
+  background-color: #e4e4e4;
+  color: #c6c6c6;
+  border: 1px solid #c6c6c6;
+}
+
+.Added svg path {
+  fill: #c6c6c6;
+}
+
+.CvComponent:last-child {
   margin-bottom: 0;
 }
 
@@ -58,6 +78,10 @@
   cursor: pointer;
 }
 
+.CvComponent .DisabledBtn {
+  background: #c6c6c6;
+}
+
 .CvComponent .TextContent .Title {
   font-size: 18px;
   font-weight: 500;
@@ -82,6 +106,7 @@
   box-sizing: border-box;
   border-radius: 5px;
   padding: 0.4rem;
+  animation: itemOpacity 2s;
 }
 
 .OpenedComponent input:last-child {

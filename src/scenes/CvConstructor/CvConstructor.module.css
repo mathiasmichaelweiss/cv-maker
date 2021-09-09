@@ -19,3 +19,8 @@
   justify-content: space-between;
   align-content: space-between;
 }
+
+.CvConstructor .ComponentsContainer .ContainerLeftBlock,
+.ContainerRightBlock {
+  width: 48%;
+}

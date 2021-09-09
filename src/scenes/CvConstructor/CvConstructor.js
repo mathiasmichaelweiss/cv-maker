@@ -122,27 +122,50 @@ export const CvConstructor = () => {
     setAddedComponents(newArr);
   };
 
+  const componentsLeftBlock = components.filter((component, id) => id <= 5);
+  const componentsRightBlock = components.filter((component, id) => id > 5);
+
   return (
     <>
       <div className={classes.CvConstructor}>
         <h3>Add Components</h3>
         <div className={classes.ComponentsContainer}>
-          {components.map((component, id) => {
-            return (
-              <CvComponent
-                key={id}
-                component={component}
-                isAddOnce={component.addOnce}
-                isAdded={component.isAdded}
-                svg={component.svg}
-                title={component.title}
-                description={component.description}
-                addComponent={addComponent}
-                openComponent={openComponent}
-                isClosed={component.isClosed}
-              />
-            );
-          })}
+          <div className={classes.ContainerLeftBlock}>
+            {componentsLeftBlock.map((component, id) => {
+              return (
+                <CvComponent
+                  key={id}
+                  component={component}
+                  isAddOnce={component.addOnce}
+                  isAdded={component.isAdded}
+                  svg={component.svg}
+                  title={component.title}
+                  description={component.description}
+                  addComponent={addComponent}
+                  openComponent={openComponent}
+                  isClosed={component.isClosed}
+                />
+              );
+            })}
+          </div>
+          <div className={classes.ContainerRightBlock}>
+            {componentsRightBlock.map((component, id) => {
+              return (
+                <CvComponent
+                  key={id}
+                  component={component}
+                  isAddOnce={component.addOnce}
+                  isAdded={component.isAdded}
+                  svg={component.svg}
+                  title={component.title}
+                  description={component.description}
+                  addComponent={addComponent}
+                  openComponent={openComponent}
+                  isClosed={component.isClosed}
+                />
+              );
+            })}
+          </div>
         </div>
         <ScrollingWindow
           addedComponents={addedComponents}

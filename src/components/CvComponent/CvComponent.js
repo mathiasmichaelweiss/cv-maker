@@ -12,45 +12,51 @@ export const CvComponent = ({
   openComponent,
   isClosed
 }) => {
-  let componentClasses = [classes.CvComponent];
+  let componentContainerClasses = [classes.CvComponent];
+  let plusBtnClasses = [classes.Plus];
 
   if (!isClosed) {
-    componentClasses.push(classes.Active);
+    componentContainerClasses.push(classes.Active);
   }
 
-  if (isClosed && componentClasses.length >= 2) {
-    componentClasses = [classes.CvComponent];
+  if (isClosed && componentContainerClasses.length >= 2) {
+    componentContainerClasses = [classes.CvComponent];
+  }
+
+  if (isAddOnce && isAdded) {
+    componentContainerClasses.push(classes.Added);
+    plusBtnClasses.push(classes.DisabledBtn);
   }
 
   return (
     <>
       {isAddOnce && isAdded ? (
-        <div className={componentClasses.join(' ')}>
+        <div className={componentContainerClasses.join(' ')}>
           <ReactSVG src={svg} />
           <div className={classes.TextContent}>
             <p className={classes.Title}>{title}</p>
             <p className={classes.Description}>{description}</p>
           </div>
-          <div className={classes.Plus}>+</div>
+          <div className={plusBtnClasses.join(' ')}>+</div>
         </div>
       ) : (
         <>
           {isClosed ? (
-            <div className={componentClasses.join(' ')}>
+            <div className={componentContainerClasses.join(' ')}>
               <ReactSVG src={svg} />
               <div className={classes.TextContent}>
                 <p className={classes.Title}>{title}</p>
                 <p className={classes.Description}>{description}</p>
               </div>
               <div
-                className={classes.Plus}
+                className={plusBtnClasses.join(' ')}
                 onClick={() => openComponent(component)}
               >
                 +
               </div>
             </div>
           ) : (
-            <div className={componentClasses.join(' ')}>
+            <div className={componentContainerClasses.join(' ')}>
               <ReactSVG src={svg} />
               <div className={classes.TextContent}>
                 <p className={classes.Title}>{title}</p>
