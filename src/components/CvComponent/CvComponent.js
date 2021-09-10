@@ -15,7 +15,21 @@ export const CvComponent = ({
   openComponent,
   isClosed
 }) => {
-  const [beginning, setBeginning] = useState('');
+  const [beginningYear, setBeginningYear] = useState('');
+  const [endingYear, setEndingYear] = useState('');
+
+  const [years, setYears] = useState({
+    beginningYear: '',
+    endingYear: ''
+  });
+  /* console.log(years.map(year => (year = year.beginningYear = 1))); */
+
+  const addYear = (obj, isBeginnig, selectedYear) => {
+    if (isBeginnig) obj.beginningYear = selectedYear;
+    if (!isBeginnig) obj.endingYear = selectedYear;
+  };
+  console.log(years);
+
   let componentContainerClasses = [classes.CvComponent];
   let plusBtnClasses = [classes.Plus];
 
@@ -127,10 +141,12 @@ export const CvComponent = ({
                           className={classes.CompanyNameInput}
                         />
                         <div className={classes.YearItem}>
-                          <p>Beginning (year)</p>
+                          <p>beginningYear (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => setBeginning(date.year())}
+                            onChange={date =>
+                              addYear(years, false, date.year())
+                            }
                           />
                         </div>
 
@@ -138,7 +154,7 @@ export const CvComponent = ({
                           <p>Ending (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => setBeginning(date.year())}
+                            onChange={date => addYear(years, true, date.year())}
                           />
                         </div>
                         <p>About</p>
@@ -187,10 +203,12 @@ export const CvComponent = ({
                           className={classes.CompanyNameInput}
                         />
                         <div className={classes.YearItem}>
-                          <p>Beginning (year)</p>
+                          <p>beginningYear (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => setBeginning(date.year())}
+                            onChange={date =>
+                              addYear(years, false, date.year())
+                            }
                           />
                         </div>
 
@@ -198,7 +216,7 @@ export const CvComponent = ({
                           <p>Ending (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => setBeginning(date.year())}
+                            onChange={date => addYear(years, true, date.year())}
                           />
                         </div>
                       </div>
