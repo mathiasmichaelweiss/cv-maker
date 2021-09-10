@@ -1,6 +1,6 @@
 import classes from './CvConstructor.module.css';
 import { CvComponent } from '../../components/CvComponent/CvComponent';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import building from './icons/building.svg';
 import education from './icons/education.svg';
 import facebookIcon from './icons/facebook_icon.svg';
@@ -17,7 +17,7 @@ export const CvConstructor = () => {
   const [components, setComponents] = useState([
     {
       svg: person,
-      title: 'Full Name',
+      title: 'Name',
       description: 'Your first and last name',
       addOnce: true,
       isAdded: false,
@@ -97,9 +97,6 @@ export const CvConstructor = () => {
     }
   ]);
   const [addedComponents, setAddedComponents] = useState([]);
-  const [componentContainerClasses, setComponentContainerClasses] = useState([
-    classes.CvComponent
-  ]);
 
   const openComponent = component => {
     setComponents([...components]);

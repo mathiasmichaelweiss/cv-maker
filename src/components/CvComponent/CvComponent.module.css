@@ -20,12 +20,42 @@
   border-radius: 5px;
   margin-bottom: 1rem;
   color: #1a1c34;
-  transition: height 1s, background-color 1s;
+}
+
+.Year {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.Year p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.Year .YearItem {
+  margin-top: 0;
+  width: 48%;
+  margin-bottom: 1rem;
+}
+
+.Year .YearItem input {
+  margin-top: 0.5rem;
+}
+
+.CompanyNameInput {
+  margin-bottom: 1rem;
+}
+
+.TextArea {
+  height: 140px;
 }
 
 .Active {
-  height: 200px;
-  transition: height 1s;
+  height: auto;
 }
 
 .Added {
@@ -93,10 +123,14 @@
 }
 
 .OpenedComponent {
-  margin-top: 1rem;
+  margin-top: 0rem;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.OpenedComponent form {
+  margin-bottom: 2rem;
 }
 
 .OpenedComponent input {
