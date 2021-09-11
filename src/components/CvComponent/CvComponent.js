@@ -2,7 +2,7 @@ import classes from './CvComponent.module.css';
 import { ReactSVG } from 'react-svg';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const CvComponent = ({
   svg,
@@ -15,20 +15,26 @@ export const CvComponent = ({
   openComponent,
   isClosed
 }) => {
-  const [beginningYear, setBeginningYear] = useState('');
-  const [endingYear, setEndingYear] = useState('');
-
   const [years, setYears] = useState({
     beginningYear: '',
     endingYear: ''
   });
-  /* console.log(years.map(year => (year = year.beginningYear = 1))); */
 
-  const addYear = (obj, isBeginnig, selectedYear) => {
-    if (isBeginnig) obj.beginningYear = selectedYear;
-    if (!isBeginnig) obj.endingYear = selectedYear;
+  const [preparingComponentToAdd, setPreparingComponentToAdd] = useState({
+    name: '',
+    secondName: '',
+    beginningYear: years.beginningYear,
+    endingYear: years.endingYear,
+    about: '',
+    type: ''
+  });
+
+  const [maxTextArea, setMaxTextArea] = useState(0);
+
+  const textAreaCounter = e => {
+    preparingComponentToAdd.about = e.target.value;
+    setMaxTextArea(preparingComponentToAdd.about.length);
   };
-  console.log(years);
 
   let componentContainerClasses = [classes.CvComponent];
   let plusBtnClasses = [classes.Plus];
@@ -48,9 +54,31 @@ export const CvComponent = ({
 
   const inputType = title.split(' ')[0].toLowerCase();
 
-  const addComponentToList = (e, svg, title, component) => {
+  const addComponentToList = (e, svg, title, component, type) => {
     e.preventDefault();
-    console.log('es geht');
+    if (inputType === 'name') {
+      addComponent(
+        svg,
+        title.name + ' ' + title.secondName,
+        component,
+        type,
+        title.secondName,
+        title.beginningYear,
+        title.endingYear,
+        title.about
+      );
+    } else {
+      addComponent(
+        svg,
+        title.name,
+        component,
+        type,
+        title.secondName,
+        title.beginningYear,
+        title.endingYear,
+        title.about
+      );
+    }
   };
 
   return (
@@ -88,23 +116,47 @@ export const CvComponent = ({
                 <p className={classes.Description}>{description}</p>
               </div>
               <div className={classes.OpenedComponent}>
-                <form action="submit" onSubmit={e => addComponentToList(e)}>
+                <form
+                  action="submit"
+                  onSubmit={e =>
+                    addComponentToList(
+                      e,
+                      svg,
+                      preparingComponentToAdd,
+                      component,
+                      inputType
+                    )
+                  }
+                >
                   {inputType === 'name' ? (
                     <>
                       <input
                         type="text"
                         name="firstName"
                         placeholder="First Name"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                       <input
                         type="text"
                         name="lastName"
                         placeholder="Last Name"
+                        onChange={e =>
+                          (preparingComponentToAdd.secondName = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'email' ? (
                     <>
-                      <input type="email" name="email" placeholder="Email" />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
+                      />
                     </>
                   ) : inputType === 'phone' ? (
                     <>
@@ -112,6 +164,9 @@ export const CvComponent = ({
                         type="phone"
                         name="phone"
                         placeholder="Phone Number"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'linkedin' ? (
@@ -120,6 +175,9 @@ export const CvComponent = ({
                         type="text"
                         name="linkedin"
                         placeholder="LinkedIN URL"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'facebook' ? (
@@ -128,6 +186,9 @@ export const CvComponent = ({
                         type="text"
                         name="facebook"
                         placeholder="Facebook URL"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'company' ? (
@@ -139,30 +200,44 @@ export const CvComponent = ({
                           name="company-name"
                           id=""
                           className={classes.CompanyNameInput}
+                          onChange={e =>
+                            (preparingComponentToAdd.name = e.target.value)
+                          }
                         />
                         <div className={classes.YearItem}>
                           <p>beginningYear (year)</p>
                           <Datetime
                             dateFormat="YYYY"
                             onChange={date =>
-                              addYear(years, false, date.year())
+                              (preparingComponentToAdd.beginningYear = date.year())
                             }
                           />
                         </div>
-
                         <div className={classes.YearItem}>
                           <p>Ending (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => addYear(years, true, date.year())}
+                            onChange={date =>
+                              (preparingComponentToAdd.endingYear = date.year())
+                            }
                           />
                         </div>
                         <p>About</p>
-                        <input
-                          type="textarea"
-                          name="about-company"
-                          className={classes.TextArea}
-                        />
+                        <div className={classes.TextAreaWrapper}>
+                          <textarea
+                            maxLength="280"
+                            name="about-company"
+                            className={classes.TextArea}
+                            onChange={e => textAreaCounter(e)}
+                          />
+                          {maxTextArea === 280 ? (
+                            <p className={classes.LimitRed}>
+                              {maxTextArea} / 280
+                            </p>
+                          ) : (
+                            <p className={classes.Limit}>{maxTextArea} / 280</p>
+                          )}
+                        </div>
                       </div>
                     </>
                   ) : inputType === 'location' ? (
@@ -171,11 +246,21 @@ export const CvComponent = ({
                         type="text"
                         name="location"
                         placeholder="Your location"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'photo' ? (
                     <>
-                      <input type="text" name="photo" placeholder="Photo URL" />
+                      <input
+                        type="text"
+                        name="photo"
+                        placeholder="Photo URL"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
+                      />
                     </>
                   ) : inputType === 'knowledge' ? (
                     <>
@@ -183,6 +268,9 @@ export const CvComponent = ({
                         type="text"
                         name="knowledge"
                         placeholder="Your skill"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
                       />
                     </>
                   ) : inputType === 'education' ? (
@@ -194,6 +282,9 @@ export const CvComponent = ({
                           name="education"
                           id=""
                           className={classes.CompanyNameInput}
+                          onChange={e =>
+                            (preparingComponentToAdd.name = e.target.value)
+                          }
                         />
                         <p>Course / Education</p>
                         <input
@@ -201,13 +292,17 @@ export const CvComponent = ({
                           name="course"
                           id=""
                           className={classes.CompanyNameInput}
+                          onChange={e =>
+                            (preparingComponentToAdd.secondName =
+                              e.target.value)
+                          }
                         />
                         <div className={classes.YearItem}>
                           <p>beginningYear (year)</p>
                           <Datetime
                             dateFormat="YYYY"
                             onChange={date =>
-                              addYear(years, false, date.year())
+                              (preparingComponentToAdd.beginningYear = date.year())
                             }
                           />
                         </div>
@@ -216,17 +311,15 @@ export const CvComponent = ({
                           <p>Ending (year)</p>
                           <Datetime
                             dateFormat="YYYY"
-                            onChange={date => addYear(years, true, date.year())}
+                            onChange={date =>
+                              (preparingComponentToAdd.endingYear = date.year())
+                            }
                           />
                         </div>
                       </div>
                     </>
                   ) : null}
-                  <button
-                    type="submit"
-                    className={classes.PlusBotton}
-                    onClick={() => addComponent(svg, title, component)}
-                  >
+                  <button type="submit" className={classes.PlusBotton}>
                     +
                   </button>
                 </form>

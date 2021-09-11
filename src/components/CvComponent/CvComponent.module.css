@@ -50,8 +50,38 @@
   margin-bottom: 1rem;
 }
 
-.TextArea {
+.CvComponent .TextAreaWrapper {
+  width: 100%;
   height: 140px;
+  position: relative;
+}
+
+.CvComponent .TextAreaWrapper .Limit {
+  position: absolute;
+  right: 0;
+  bottom: -0.5rem;
+  right: 0.5rem;
+}
+
+.CvComponent .TextAreaWrapper .LimitRed {
+  position: absolute;
+  right: 0;
+  bottom: -0.5rem;
+  right: 0.5rem;
+  color: rgb(255, 30, 30);
+}
+
+.CvComponent .TextAreaWrapper .TextArea {
+  width: 100%;
+  height: 140px;
+  margin-top: 1rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0.4rem;
+  animation: itemOpacity 2s;
+  resize: none;
 }
 
 .Active {

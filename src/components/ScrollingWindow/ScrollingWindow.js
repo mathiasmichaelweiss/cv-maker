@@ -10,6 +10,7 @@ export const ScrollingWindow = ({ addedComponents, removeComponent }) => {
               return (
                 <AddedComponent
                   addedComponent={addedComponent}
+                  index={id}
                   key={id}
                   removeComponent={removeComponent}
                 />
