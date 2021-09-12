@@ -1,0 +1,107 @@
+.CV {
+  position: absolute;
+  z-index: 1000;
+  top: 5vh;
+  left: 20rem;
+  bottom: 2rem;
+  right: 20rem;
+  background: #fff;
+  box-shadow: 0px 0px 38px rgba(0, 164, 255, 0.1);
+  border-radius: 5px;
+  border: 1px solid #afacc1;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  transform: scale(0);
+  transition: transform 0.3s;
+}
+
+.Visible {
+  transform: scale(1);
+}
+
+.CV .Colors {
+  width: 30%;
+  height: 100%;
+}
+
+.CV .Colors .ColorRow {
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.CV .Colors .ColorRow .Color {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  transform: scale(1);
+}
+
+.CV .Colors .ColorRow .Color:hover {
+  transform: scale(1.1);
+}
+
+.CV .SkipAndSave {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.CV .SkipAndSave .Top .Close {
+  cursor: pointer;
+}
+
+.CV .CVBody {
+  width: 40%;
+  height: 100%;
+  border: 1px solid lightgray;
+  overflow: hidden;
+}
+
+.CV .CVBody .Skills {
+  width: 30%;
+  height: 100%;
+}
+.CV .CVBody .OtherData {
+}
+
+.CV .CVBody .CVHeader {
+  display: flex;
+  height: 25%;
+  width: 100%;
+  color: #fff;
+}
+
+.CV .CVBody .CVHeader .Photo {
+  width: 30%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 0;
+}
+
+.CV .CVBody .CVHeader .Contacts {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.CV .CVBody .CVHeader .Contacts .Name {
+  width: 100%;
+  padding-top: 3rem;
+  margin-left: 3rem;
+  font-size: 2em;
+}
+
+.CV .CVBody .CVHeader .Contacts .Position {
+  width: 100%;
+  font-size: 1.1em;
+  margin-left: 3rem;
+}

@@ -1,7 +1,10 @@
 import classes from './CvConstructor.module.css';
 import { CvComponent } from '../../components/CvComponent/CvComponent';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ScrollingWindow } from '../../components/ScrollingWindow/ScrollingWindow';
+import { CV } from '../CV/CV';
+import { Btn } from '../../components/Btn/Btn';
+import { useState } from 'react';
 
 export const CvConstructor = ({
   addedComponents,
@@ -42,6 +45,7 @@ export const CvConstructor = ({
     component.isClosed = true;
   };
 
+  const [cvVisible, setCvVisible] = useState(false);
   console.log(addedComponents);
 
   const removeComponent = (component, idx) => {
@@ -50,7 +54,6 @@ export const CvConstructor = ({
     const after = addedComponents.slice(index + 1);
 
     const newArr = [...before, ...after];
-    console.log(components[idx]);
 
     components[idx].isAdded = false;
 
@@ -63,6 +66,11 @@ export const CvConstructor = ({
   return (
     <>
       <div className={classes.CvConstructor}>
+        <CV
+          cvVisible={cvVisible}
+          setCvVisible={setCvVisible}
+          addedComponents={addedComponents}
+        />
         <h3>Add Components</h3>
         <div className={classes.ComponentsContainer}>
           <div className={classes.ContainerLeftBlock}>
@@ -106,6 +114,9 @@ export const CvConstructor = ({
           addedComponents={addedComponents}
           removeComponent={removeComponent}
         />
+        <div className={classes.Bottom}>
+          <Btn text="show result" makeAction={() => setCvVisible(true)} />
+        </div>
       </div>
     </>
   );

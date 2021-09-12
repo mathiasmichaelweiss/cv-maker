@@ -20,6 +20,12 @@
   align-content: space-between;
 }
 
+.CvConstructor .Bottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .CvConstructor .ComponentsContainer .ContainerLeftBlock,
 .ContainerRightBlock {
   width: 48%;

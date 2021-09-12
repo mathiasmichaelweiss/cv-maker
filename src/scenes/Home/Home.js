@@ -1,7 +1,6 @@
 import classes from './Home.module.css';
 import { BigBtn } from '../../components/BigBtn/BigBtn';
 import { Tag } from '../../components/Tag/Tag';
-import secondImg from './img/img-1.jpg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

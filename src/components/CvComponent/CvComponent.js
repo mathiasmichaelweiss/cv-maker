@@ -147,6 +147,18 @@ export const CvComponent = ({
                         }
                       />
                     </>
+                  ) : inputType === 'position' ? (
+                    <>
+                      <input
+                        type="text"
+                        name="position"
+                        placeholder="Your position"
+                        onChange={e =>
+                          (preparingComponentToAdd.name = e.target.value)
+                        }
+                        style={{ width: '100%' }}
+                      />
+                    </>
                   ) : inputType === 'email' ? (
                     <>
                       <input
@@ -156,6 +168,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'phone' ? (
@@ -167,6 +180,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'linkedin' ? (
@@ -178,6 +192,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'facebook' ? (
@@ -189,6 +204,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'company' ? (
@@ -249,6 +265,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'photo' ? (
@@ -260,6 +277,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'knowledge' ? (
@@ -271,6 +289,7 @@ export const CvComponent = ({
                         onChange={e =>
                           (preparingComponentToAdd.name = e.target.value)
                         }
+                        style={{ width: '100%' }}
                       />
                     </>
                   ) : inputType === 'education' ? (

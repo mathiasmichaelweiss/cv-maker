@@ -2,7 +2,7 @@ import classes from './Container.module.css';
 import { Home } from '../scenes/Home/Home';
 import { Header } from '../components/Header/Header';
 import { CvConstructor } from '../scenes/CvConstructor/CvConstructor';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useState } from 'react';
 import building from '../scenes/CvConstructor/icons/building.svg';
 import education from '../scenes/CvConstructor/icons/education.svg';
@@ -14,6 +14,7 @@ import linkedin from '../scenes/CvConstructor/icons/linkedin.svg';
 import mail from '../scenes/CvConstructor/icons/mail.svg';
 import person from '../scenes/CvConstructor/icons/person.svg';
 import phone from '../scenes/CvConstructor/icons/phone.svg';
+import position from '../scenes/CvConstructor/icons/position.svg';
 
 export const Container = () => {
   const [components, setComponents] = useState([
@@ -21,6 +22,14 @@ export const Container = () => {
       svg: person,
       title: 'Name',
       description: 'Your first and last name',
+      addOnce: true,
+      isAdded: false,
+      isClosed: true
+    },
+    {
+      svg: position,
+      title: 'Position',
+      description: 'Your position',
       addOnce: true,
       isAdded: false,
       isClosed: true
