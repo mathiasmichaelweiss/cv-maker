@@ -1,5 +1,5 @@
 import classes from './CV.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Btn } from '../../components/Btn/Btn';
 import { ReactSVG } from 'react-svg';
 import close from './icons/close.svg';
@@ -24,7 +24,7 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
   const ColorRow1 = colors.filter((color, i) => i <= 4);
   const ColorRow2 = colors.filter((color, i) => i > 4);
 
-  const getDataFromArray = (dataType, arr) => {
+  const getDataFromArray = (dataType, arr, getAll) => {
     let isName = false;
     if (
       dataType === 'name' ||
@@ -40,6 +40,9 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
       isName = true;
     }
     let result;
+    if (getAll) {
+      result = arr.map(item => item);
+    }
     for (let i = 0; i <= arr.length - 1; i++) {
       if (dataType === arr[i].type && isName) {
         result = arr[i].name;
@@ -67,6 +70,40 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
     console.log(dataType);
     return result;
   };
+
+  const dataFilter = (data, types) => {
+    const dataTypes = types;
+    const filteredData = data.filter(item => {
+      for (let i = 0; i <= dataTypes.length; i++) {
+        let filtered = [];
+        if (item.type === dataTypes[i]) {
+          return (filtered = filtered.push(item));
+        }
+      }
+    });
+    return filteredData;
+  };
+
+  const probe = dataFilter(addedComponents, [
+    'email',
+    'phone',
+    'location',
+    'linkedin',
+    'facebook'
+  ]);
+  const contactsBlockFirst = addedComponents.filter(item => {
+    if (
+      item.type === 'email' ||
+      item.type === 'phone' ||
+      item.type === 'location' ||
+      item.type === 'linkedin' ||
+      item.type === 'facebook'
+    ) {
+      return item;
+    }
+  });
+
+  console.log(probe);
 
   return (
     <>
@@ -116,6 +153,8 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
               <p className={classes.Position}>
                 {getDataFromArray('position', addedComponents)}
               </p>
+              <div className={classes.ContactsBlock}></div>
+              <div className={classes.ContactsBlock}></div>
             </div>
           </div>
           <div
