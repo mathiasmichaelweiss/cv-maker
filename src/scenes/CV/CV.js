@@ -282,7 +282,7 @@ export const CV = ({
             />
           </div>
           <div className={classes.Bottom}>
-            <Btn text="save" onClick={handlePrint} />
+            <Btn text="save" makeAction={handlePrint} />
           </div>
         </div>
       </div>
