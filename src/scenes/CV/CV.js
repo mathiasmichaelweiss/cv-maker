@@ -1,10 +1,16 @@
 import classes from './CV.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Btn } from '../../components/Btn/Btn';
+import { useReactToPrint } from 'react-to-print';
 import { ReactSVG } from 'react-svg';
 import close from './icons/close.svg';
 
-export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
+export const CV = ({
+  setCvVisible,
+  cvVisible,
+  addedComponents,
+  dataFilter
+}) => {
   const [themeColor, setThemeColor] = useState('#004F5F');
   const [colors, setColors] = useState([
     { theme: 'Default', colorName: 'darkGreen', background: '#004F5F' },
@@ -18,6 +24,11 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
     { theme: 'Default', colorName: 'gray', background: '#616161' },
     { theme: 'Default', colorName: 'lightGreen', background: '#00E1D4' }
   ]);
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current
+  });
+
   let CVclasses = [classes.CV];
   if (cvVisible) CVclasses.push(classes.Visible);
 
@@ -64,24 +75,11 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
         };
       }
     }
-    console.log(isName);
+    /*     console.log(isName);
     console.log(result);
     console.log(arr);
-    console.log(dataType);
+    console.log(dataType); */
     return result;
-  };
-
-  const dataFilter = (data, types) => {
-    const dataTypes = types;
-    const filteredData = data.filter(item => {
-      for (let i = 0; i <= dataTypes.length; i++) {
-        let filtered = [];
-        if (item.type === dataTypes[i]) {
-          return (filtered = filtered.push(item));
-        }
-      }
-    });
-    return filteredData;
   };
 
   const probe = dataFilter(addedComponents, [
@@ -91,19 +89,16 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
     'linkedin',
     'facebook'
   ]);
-  const contactsBlockFirst = addedComponents.filter(item => {
-    if (
-      item.type === 'email' ||
-      item.type === 'phone' ||
-      item.type === 'location' ||
-      item.type === 'linkedin' ||
-      item.type === 'facebook'
-    ) {
-      return item;
-    }
-  });
 
-  console.log(probe);
+  let contactsBlockFirst = dataFilter(addedComponents, [
+    'email',
+    'phone',
+    'linkedin'
+  ]);
+
+  let contactsBlockSecond = dataFilter(addedComponents, ['facebook']);
+
+  console.log(contactsBlockFirst.length);
 
   return (
     <>
@@ -135,7 +130,7 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
             })}
           </div>
         </div>
-        <div className={classes.CVBody}>
+        <div className={classes.CVBody} ref={componentRef}>
           <div className={classes.CVHeader} style={{ background: themeColor }}>
             <div
               className={classes.Photo}
@@ -153,16 +148,131 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
               <p className={classes.Position}>
                 {getDataFromArray('position', addedComponents)}
               </p>
-              <div className={classes.ContactsBlock}></div>
-              <div className={classes.ContactsBlock}></div>
+              <div className={classes.ContactsBlock}>
+                {contactsBlockFirst.length >= 1
+                  ? contactsBlockFirst.map((item, i) => {
+                      console.log(item);
+                      if (
+                        item.type !== 'linkedin' &&
+                        item.type !== 'facebook'
+                      ) {
+                        return (
+                          <a
+                            key={Date.now() + i}
+                            className={classes.ContactsBlockItem}
+                          >
+                            <ReactSVG
+                              src={item.svg}
+                              className={classes.CVIcon}
+                            />
+                            <p>{item.name}</p>
+                          </a>
+                        );
+                      } else {
+                        return (
+                          <a
+                            href={item.name}
+                            target="_blank"
+                            key={Date.now() + i}
+                            className={classes.ContactsBlockItem}
+                          >
+                            <ReactSVG
+                              src={item.svg}
+                              className={classes.CVIcon}
+                            />
+                            <p>{item.name.split('').splice(24).join('')}</p>
+                          </a>
+                        );
+                      }
+                    })
+                  : null}
+              </div>
+              <div className={classes.ContactsBlock}>
+                {contactsBlockFirst.length >= 1
+                  ? contactsBlockSecond.map((item, i) => {
+                      return (
+                        <a
+                          href={item.name}
+                          target="_blank"
+                          key={Date.now() + i}
+                          className={classes.ContactsBlockItem}
+                        >
+                          <ReactSVG src={item.svg} className={classes.CVIcon} />
+                          <p>{item.name.split('').splice(24).join('')}</p>
+                        </a>
+                      );
+                    })
+                  : null}
+              </div>
             </div>
           </div>
-          <div
-            className={classes.Skills}
-            style={{ background: themeColor }}
-          ></div>
-          <div className={classes.OtherData}></div>
+          <div className={classes.Skills} style={{ background: themeColor }}>
+            {dataFilter(addedComponents, ['location']).map((item, i) => {
+              return <p className={classes.Location}>{item.name}</p>;
+            })}
+
+            <p className={classes.SkillsTitle}>Skills</p>
+            {dataFilter(addedComponents, ['knowledge']).map((item, i) => {
+              return <p> - {item.name}</p>;
+            })}
+          </div>
+
+          <div className={classes.OtherData}>
+            <div className={classes.OtherDataItem}>
+              <p className={classes.Title}>About</p>
+              {dataFilter(addedComponents, ['about']).map((item, i) => {
+                return <>{item.name}</>;
+              })}
+            </div>
+            <div className={classes.OtherDataItem}>
+              <p className={classes.Title}>Education</p>
+              {dataFilter(addedComponents, ['education']).map((item, i) => {
+                return (
+                  <div className={classes.Education}>
+                    <ReactSVG src={item.svg} />
+                    <div className={classes.EducationDesription}>
+                      <div className={classes.EducationName}>{item.name}</div>
+                      <div className={classes.EducationName}>
+                        {item.secondName}
+                      </div>
+                    </div>
+                    <div className={classes.EducationYears}>
+                      <div className={classes.Year}>{item.beginningYear}</div>
+                      <span>&nbsp;/&nbsp;</span>
+                      <div className={classes.Year}>{item.endingYear}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className={classes.OtherDataItem}>
+              <p className={classes.Title}>Experience</p>
+              {dataFilter(addedComponents, ['company']).map((item, i) => {
+                return (
+                  <>
+                    <div className={classes.Experience}>
+                      <ReactSVG src={item.svg} />
+                      <div className={classes.ExperienceDesription}>
+                        <div className={classes.ExperienceName}>
+                          {item.name}
+                        </div>
+                        <div className={classes.ExperienceYears}>
+                          <div className={classes.Year}>
+                            {item.beginningYear}
+                          </div>
+                          <span>&nbsp;/&nbsp;</span>
+                          <div className={classes.Year}>{item.endingYear}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <p style={{ marginTop: '0.5rem' }}>{item.about}</p>
+                  </>
+                );
+              })}
+            </div>
+          </div>
         </div>
+
         <div className={classes.SkipAndSave}>
           <div className={classes.Top}>
             <ReactSVG
@@ -172,7 +282,7 @@ export const CV = ({ setCvVisible, cvVisible, addedComponents }) => {
             />
           </div>
           <div className={classes.Bottom}>
-            <Btn text="save" />
+            <Btn text="save" onClick={handlePrint} />
           </div>
         </div>
       </div>

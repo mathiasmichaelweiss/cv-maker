@@ -337,6 +337,29 @@ export const CvComponent = ({
                         </div>
                       </div>
                     </>
+                  ) : inputType === 'about' ? (
+                    <>
+                      <div className={classes.Year}>
+                        <p>About</p>
+                        <div className={classes.TextAreaWrapper}>
+                          <textarea
+                            maxLength="280"
+                            name="about-company"
+                            className={classes.TextArea}
+                            onChange={e =>
+                              (preparingComponentToAdd.name = e.target.value)
+                            }
+                          />
+                          {maxTextArea === 280 ? (
+                            <p className={classes.LimitRed}>
+                              {maxTextArea} / 280
+                            </p>
+                          ) : (
+                            <p className={classes.Limit}>{maxTextArea} / 280</p>
+                          )}
+                        </div>
+                      </div>
+                    </>
                   ) : null}
                   <button type="submit" className={classes.PlusBotton}>
                     +

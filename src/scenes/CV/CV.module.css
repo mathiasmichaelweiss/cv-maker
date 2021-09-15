@@ -57,18 +57,115 @@
   cursor: pointer;
 }
 
+
+
 .CV .CVBody {
   width: 40%;
-  height: 700px;
+  min-height: 700px;
   border: 1px solid lightgray;
   overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .CV .CVBody .Skills {
+  color: #fff;
   width: 30%;
   height: 100%;
+  font-size: 10px;
 }
+
+.CV .CVBody .Skills .Location {
+  font-weight: 400;
+  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.CV .CVBody .Skills .SkillsTitle {
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.CV .CVBody .Skills p {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .CV .CVBody .OtherData {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: start;
+  flex-wrap: wrap;
+}
+
+.CV .CVBody .OtherData .Title {
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.CV .CVBody .OtherData .OtherDataItem {
+  width: 80%;
+  min-height: 70px;
+  padding-top: 1rem;
+  font-size: 10px;
+}
+
+.OtherData .Education {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.CV .CVBody .OtherData .EducationDesription {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.CV .CVBody .OtherData .Education .EducationYears {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 25%;
+}
+
+.CV .CVBody .OtherData .EducationDesription .EducationName {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.OtherData .Experience {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.CV .CVBody .OtherData .ExperienceDesription {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+}
+
+.CV .CVBody .OtherData .Experience .ExperienceYears {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 30%;
+}
+
+.CV .CVBody .OtherData .ExperienceDesription .ExperienceName {
+  width: 70%;
+  display: flex;
+  align-items: center;
 }
 
 .CV .CVBody .CVHeader {
@@ -87,24 +184,58 @@
 
 .CV .CVBody .CVHeader .Contacts {
   width: 70%;
-  height: 100%;
+  height: 50%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .CV .CVBody .CVHeader .Contacts .ContactsBlock {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 1.5rem;
+}
+
+.CV .CVBody .CVHeader .Contacts .ContactsBlock .ContactsBlockItem {
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  /* margin-left: 1.5rem; */
+  height: 33%;
+  cursor: pointer;
+  width: 100%;
 }
 
 .CV .CVBody .CVHeader .Contacts .Name {
   width: 100%;
-  padding-top: 3rem;
-  margin-left: 3rem;
+  padding-top: 1.5rem;
+  margin-left: 1.5rem;
   font-size: 1.5em;
   margin-bottom: 0.5rem;
+}
+
+.CV .CVBody .CVHeader .Contacts .ContactsBlock .ContactsBlockItem svg {
+  margin-right: 0.5rem;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: start;
+}
+
+.CVIcon path {
+  fill: #fff;
+}
+
+.CV a {
+  color: #fff;
 }
 
 .CV .CVBody .CVHeader .Contacts .Position {
   width: 100%;
   font-size: 0.8em;
-  margin-left: 3rem;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
 }

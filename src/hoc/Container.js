@@ -15,6 +15,7 @@ import mail from '../scenes/CvConstructor/icons/mail.svg';
 import person from '../scenes/CvConstructor/icons/person.svg';
 import phone from '../scenes/CvConstructor/icons/phone.svg';
 import position from '../scenes/CvConstructor/icons/position.svg';
+import about from '../scenes/CvConstructor/icons/about.svg';
 
 export const Container = () => {
   const [components, setComponents] = useState([
@@ -105,9 +106,30 @@ export const Container = () => {
       addOnce: false,
       isAdded: false,
       isClosed: true
+    },
+    {
+      svg: about,
+      title: 'About',
+      description: 'Something about you',
+      addOnce: false,
+      isAdded: false,
+      isClosed: true
     }
   ]);
   const [addedComponents, setAddedComponents] = useState([]);
+
+  const dataFilter = (data, types) => {
+    const dataTypes = types;
+    const filteredData = data.filter(item => {
+      for (let i = 0; i <= dataTypes.length; i++) {
+        let filtered = [];
+        if (item.type === dataTypes[i]) {
+          return (filtered = filtered.push(item));
+        }
+      }
+    });
+    return filteredData;
+  };
 
   return (
     <div className={classes.Container}>
@@ -122,6 +144,7 @@ export const Container = () => {
             setAddedComponents={setAddedComponents}
             components={components}
             setComponents={setComponents}
+            dataFilter={dataFilter}
           />
         )}
       />

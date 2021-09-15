@@ -10,7 +10,8 @@ export const CvConstructor = ({
   addedComponents,
   setAddedComponents,
   components,
-  setComponents
+  setComponents,
+  dataFilter
 }) => {
   const openComponent = component => {
     setComponents([...components]);
@@ -70,6 +71,7 @@ export const CvConstructor = ({
           cvVisible={cvVisible}
           setCvVisible={setCvVisible}
           addedComponents={addedComponents}
+          dataFilter={dataFilter}
         />
         <h3>Add Components</h3>
         <div className={classes.ComponentsContainer}>
