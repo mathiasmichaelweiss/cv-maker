@@ -1,8 +1,9 @@
 import classes from './CV.module.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Btn } from '../../components/Btn/Btn';
 import { useReactToPrint } from 'react-to-print';
 import { ReactSVG } from 'react-svg';
+import html2canvas from 'html2canvas';
 import close from './icons/close.svg';
 
 export const CV = ({
@@ -25,6 +26,16 @@ export const CV = ({
     { theme: 'Default', colorName: 'lightGreen', background: '#00E1D4' }
   ]);
   const componentRef = useRef();
+
+  const pngCV = document.querySelector('.getCVBody');
+
+  useEffect(() => {
+    let toLocalStorage = getDataFromArray('photo', addedComponents);
+    localStorage.setItem('photo', toLocalStorage);
+  }, [addedComponents]);
+
+  console.log(pngCV);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   });
@@ -75,20 +86,8 @@ export const CV = ({
         };
       }
     }
-    /*     console.log(isName);
-    console.log(result);
-    console.log(arr);
-    console.log(dataType); */
     return result;
   };
-
-  const probe = dataFilter(addedComponents, [
-    'email',
-    'phone',
-    'location',
-    'linkedin',
-    'facebook'
-  ]);
 
   let contactsBlockFirst = dataFilter(addedComponents, [
     'email',
@@ -98,7 +97,26 @@ export const CV = ({
 
   let contactsBlockSecond = dataFilter(addedComponents, ['facebook']);
 
-  console.log(contactsBlockFirst.length);
+  const CVBodyClasses = [classes.CVBody, 'getCVBody'];
+
+  const capture = () => {
+    html2canvas(document.body.querySelector('.getCVBody'), {
+      useCORS: true,
+      allowTaint: true
+    }).then(function (canvas) {
+      const modal = document.createElement('div');
+      const description = document.createElement('p');
+      description.style = 'color: #fff; width: 100%; text-align: center';
+      description.textContent = 'right click  => Save Image As...';
+      modal.classList.add('modal');
+      modal.style =
+        'display: flex; flex-wrap: wrap; justify-content: center; align-content: space-around; position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1500; background: rgba(0,0,0, 0.7);';
+      canvas.style = 'height: 802px; width: 634px';
+      modal.append(description);
+      modal.append(canvas);
+      document.body.appendChild(modal);
+    });
+  };
 
   return (
     <>
@@ -130,15 +148,12 @@ export const CV = ({
             })}
           </div>
         </div>
-        <div className={classes.CVBody} ref={componentRef}>
+        <div className={CVBodyClasses.join(' ')} ref={componentRef}>
           <div className={classes.CVHeader} style={{ background: themeColor }}>
             <div
               className={classes.Photo}
               style={{
-                backgroundImage: `url(${getDataFromArray(
-                  'photo',
-                  addedComponents
-                )})`
+                backgroundImage: `url(${localStorage.getItem('photo')})`
               }}
             ></div>
             <div className={classes.Contacts}>
@@ -282,7 +297,7 @@ export const CV = ({
             />
           </div>
           <div className={classes.Bottom}>
-            <Btn text="save" makeAction={handlePrint} />
+            <Btn text="save" makeAction={() => capture()} />
           </div>
         </div>
       </div>

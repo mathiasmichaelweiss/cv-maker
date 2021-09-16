@@ -34,7 +34,7 @@ html,
 body {
   position: relative;
   overflow-x: hidden;
-  z-index: 10;
+  z-index: 1500;
   height: 100%;
   width: 100%;
   font-size: 100%;
